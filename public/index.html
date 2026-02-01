@@ -3,197 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SANN404 - Image Compressor</title>
+    <title>SANN404 FORUM - Image Compressor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="logo-text">SANN404<span class="logo-icon">✨</span></span>
-                <div class="breadcrumb-arrow">&gt;</div>
-                <div class="tool-icon"><img src="https://img.icons8.com/ios-filled/50/d946ef/image.png" alt="icon"></div>
+    <header class="main-header blur-effect">
+        <div class="header-container">
+            <div class="logo-section">
+                <h2 class="site-logo">SANN404 FORUM</h2>
             </div>
-            
-            <div class="nav-center">
-                <span>Tools</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-
-            <div class="nav-right">
-                <button class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <div class="profile-section">
+                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Profile" class="profile-pic">
             </div>
         </div>
-    </nav>
+    </header>
 
     <main>
         <section class="hero-section">
-            <h1 class="main-title">
-                Kompres <br>
-                <span class="gradient-text">gambar, foto, file</span><br>
-                dalam hitungan detik
-            </h1>
-            
-            <p class="sub-text">
-                Unggah, pilih kualitas yang diinginkan, kompres, dan unduh.<br>
-                Gratis digunakan. Tidak perlu mendaftar!
-            </p>
-
-            <div class="action-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Kompres ukuran <br>
+                    <span class="gradient-text">gambar, foto, file</span><br>
+                    dalam hitungan detik.
+                </h1>
+                <p class="hero-subtitle">
+                    Unggah, pilih tingkat kualitas, dan unduh hasilnya. Gratis digunakan tanpa perlu mendaftar!
+                </p>
                 
-                <div id="drop-zone" class="upload-btn-wrapper">
-                    <button class="btn-black-large" onclick="document.getElementById('file-input').click()">
-                        Unggah Gambar
-                    </button>
-                    <p class="format-info">Format yang didukung: JPG, PNG, WEBP, AVIF</p>
-                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
-                </div>
-
-                <div id="controls" class="controls-panel hidden">
-                    <div class="file-badge">
-                        <span id="file-name">file.jpg</span>
-                        <span id="original-size">0 KB</span>
+                <div class="compression-tool-container">
+                     <div class="upload-area" id="drop-zone">
+                        <button class="btn-black-large" onclick="document.getElementById('file-input').click()">Unggah Gambar</button>
+                        <p class="drag-text">atau seret & lepas file di sini</p>
+                        <p class="limit-info">Mendukung: JPG, PNG, WEBP (Maks 5MB)</p>
+                        <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
                     </div>
 
-                    <div class="slider-container">
-                        <label>Level Kompresi: <span id="quality-value">80</span>%</label>
-                        <input type="range" id="quality-slider" min="10" max="90" value="80">
-                    </div>
-
-                    <button id="compress-btn" class="btn-black-large">Mulai Kompresi</button>
-                </div>
-
-                <div id="loading" class="loading-state hidden">
-                    <div class="spinner"></div>
-                    <p>Sedang memproses...</p>
-                </div>
-
-                <div id="result" class="result-panel hidden">
-                    <h3>Hasil Kompresi</h3>
-                    
-                    <div class="comparison-cards">
-                        <div class="comp-card before">
-                            <span class="label">Original (Sebelum)</span>
-                            <div class="size-display" id="res-original">0 KB</div>
+                    <div class="controls hidden" id="controls">
+                        <div class="file-info-box">
+                            <span id="file-name">image.jpg</span>
+                            <span id="original-size" class="badge-gray">0 KB</span>
                         </div>
-                        <div class="arrow-indicator">➝</div>
-                        <div class="comp-card after">
-                            <span class="label">Compressed (Sesudah)</span>
-                            <div class="size-display success" id="res-compressed">0 KB</div>
-                            <div class="savings-badge" id="res-savings">-0%</div>
+                        
+                        <div class="quality-control-box">
+                            <label for="quality-slider">Tingkat Kualitas: <span id="quality-value">80</span>%</label>
+                            <input type="range" id="quality-slider" min="10" max="90" value="80" class="custom-slider">
                         </div>
+
+                        <button id="compress-btn" class="btn-black-large">Mulai Kompresi</button>
                     </div>
 
-                    <div class="result-actions">
+                    <div class="loading hidden" id="loading">
+                        <div class="spinner"></div>
+                        <p>Sedang memproses...</p>
+                    </div>
+
+                    <div class="result hidden" id="result">
+                        <h3>Hasil Kompresi</h3>
+                        <div class="stats-grid-result">
+                            <div class="stat-box-result">
+                                <small>Asli</small>
+                                <strong id="res-original">0 KB</strong>
+                            </div>
+                            <div class="stat-box-result success-box">
+                                <small>Hasil</small>
+                                <strong id="res-compressed">0 KB</strong>
+                            </div>
+                            <div class="stat-box-result">
+                                <small>Hemat</small>
+                                <strong id="res-savings" class="success-text">0%</strong>
+                            </div>
+                        </div>
                         <a id="download-btn" class="btn-black-large" download>Unduh Gambar</a>
-                        <button id="reset-btn" class="btn-text">Kompres Lagi</button>
+                        <button id="reset-btn" class="btn-link">Kompres Gambar Lain</button>
                     </div>
+                    
+                    <div id="error-msg" class="error-msg hidden"></div>
                 </div>
-
-                <div id="error-msg" class="error-message hidden"></div>
-            </div>
+                 </div>
         </section>
 
-        <section class="stats-section">
-            <h2>Dicintai oleh Jutaan Orang:</h2>
-            <p class="stats-desc">SANN404 populer di seluruh dunia. Dengan setiap gambar yang diedit, kami memberikan kekuatan lebih kepada pengguna.</p>
-            
-            <div class="stats-big">
-                <div class="stat-block">
-                    <div class="number">18 Juta</div>
-                    <div class="label">PENGGUNA</div>
+        <section class="stats-section text-center">
+            <p class="stats-intro">
+                SANN404 FORUM populer di kalangan profesional. Kami memberikan kemudahan dalam pengelolaan aset digital Anda.
+            </p>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h2 class="stat-number">18 Juta</h2>
+                    <p class="stat-label">PENGGUNA AKTIF</p>
                 </div>
-                <div class="stat-block">
-                    <div class="number">120 Juta</div>
-                    <div class="label">GAMBAR</div>
+                <div class="stat-item">
+                    <h2 class="stat-number">120 Juta</h2>
+                    <p class="stat-label">GAMBAR DIPROSES</p>
                 </div>
             </div>
         </section>
 
         <section class="steps-section">
             <div class="step-card">
-                <div class="step-circle">1</div>
+                <div class="step-number">1</div>
                 <h3>Unggah</h3>
-                <p>Unggah gambar Anda dengan menarik dan melepaskan, atau mengklik tombol unggah. Kami mendukung JPG, PNG, WEBP.</p>
+                <p>Unggah gambar Anda dengan cara drag & drop atau klik tombol unggah. Kami mendukung berbagai format populer.</p>
             </div>
             <div class="step-card">
-                <div class="step-circle">2</div>
-                <h3>Pilih</h3>
-                <p>Gunakan slider untuk mengatur tingkat kompresi. Anda bisa menyesuaikan keseimbangan antara kualitas dan ukuran file.</p>
+                <div class="step-number">2</div>
+                <h3>Atur</h3>
+                <p>Gunakan slider untuk menentukan keseimbangan antara kualitas dan ukuran file yang Anda inginkan.</p>
             </div>
             <div class="step-card">
-                <div class="step-circle">3</div>
+                <div class="step-number">3</div>
                 <h3>Kompres</h3>
-                <p>Klik tombol kompres. AI kami akan memproses gambar Anda dalam hitungan detik untuk hasil maksimal.</p>
+                <p>Sistem AI kami akan memproses gambar Anda secara instan untuk mendapatkan ukuran file terkecil.</p>
             </div>
             <div class="step-card">
-                <div class="step-circle">4</div>
+                <div class="step-number">4</div>
                 <h3>Unduh</h3>
-                <p>Ketika Anda puas dengan hasilnya, klik unduh untuk menyimpan gambar ke perangkat Anda.</p>
+                <p>Setelah puas dengan hasilnya, unduh gambar yang telah dikompres ke perangkat Anda.</p>
             </div>
         </section>
 
-        <section class="testimonial-section">
-            <div class="testimonial-box">
-                <div class="user-header">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="user-avatar">
-                    <div class="user-meta">
-                        <strong>Matthew Ritchie</strong>
-                        <span>Writer at Nook Calendar</span>
-                    </div>
-                    <div class="arrow-icon">↗</div>
+        <section class="testimonials-section">
+            <div class="testimonial-header">
+                <h2>Dicintai oleh Banyak Pengguna</h2>
+                <div class="slider-nav">
+                    <button class="nav-btn prev-slide">&#8592;</button>
+                    <button class="nav-btn next-slide">&#8594;</button>
                 </div>
-                <p class="quote">
-                    Otak saya meledak 🤯 Ini terlihat sangat sederhana! Saya menggunakan Adobe suite, tetapi banyak orang di startup yang kekurangan dana bisa menggunakan ini. Ide yang bagus!
-                </p>
+            </div>
+            
+            <div class="testimonial-slider-container">
+                <div class="testimonial-card">
+                    <div class="user-profile-testi">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Matthew">
+                        <div>
+                            <h4>Matthew Ritchie</h4>
+                            <span>Writer at Nook Calendar</span>
+                        </div>
+                    </div>
+                    <p class="testi-quote">"Otak saya meledak 🤯 Ini terlihat sangat sederhana! Saya biasa pakai software berat, tapi untuk kebutuhan cepat di startup, alat ini sangat membantu dan menghemat waktu. Ide yang luar biasa!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="user-profile-testi">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah">
+                        <div>
+                            <h4>Sarah Jenkins</h4>
+                            <span>Digital Marketer</span>
+                        </div>
+                    </div>
+                    <p class="testi-quote">"Sangat membantu untuk mengoptimalkan gambar website klien saya tanpa mengorbankan kualitas visualnya. Website jadi lebih cepat loading!"</p>
+                </div>
+                 <div class="testimonial-card">
+                    <div class="user-profile-testi">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="David">
+                        <div>
+                            <h4>David Chen</h4>
+                            <span>Freelance Designer</span>
+                        </div>
+                    </div>
+                    <p class="testi-quote">"Workflow saya jadi jauh lebih cepat. Tidak perlu membuka Photoshop hanya untuk mengecilkan ukuran file JPEG. UI-nya juga sangat bersih."</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>About</h4>
-                <a href="#">Story</a>
-                <a href="#">Handbook</a>
+    <footer class="dark-footer">
+        <div class="footer-content">
+            <div class="footer-column brand-col">
+                <h3>SANN404 FORUM</h3>
+                <p>Solusi digital cerdas untuk kebutuhan kreatif Anda.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Produk</h4>
+                <a href="#">Kompresor Gambar</a>
+                <a href="#">Hapus Background</a>
+                <a href="#">Upscaler AI</a>
+            </div>
+            <div class="footer-column">
+                <h4>Perusahaan</h4>
+                <a href="#">Tentang Kami</a>
                 <a href="#">Blog</a>
+                <a href="#">Karir</a>
             </div>
-            <div class="footer-col">
-                <h4>Tools</h4>
-                <a href="#">Image Compressor</a>
-                <a href="#">Background Remover</a>
-                <a href="#">Magic Eraser</a>
-                <a href="#">Upscaler</a>
-            </div>
-            <div class="footer-col">
-                <h4>Connect</h4>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Facebook</a>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+            <div class="footer-column">
+                <h4>Dukungan</h4>
+                <a href="#">Pusat Bantuan</a>
+                <a href="#">Kontak</a>
+                <a href="#">Status</a>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <div class="footer-logo">
-                SANN404<span class="logo-icon">✨</span>
-            </div>
-            <button class="lang-btn">
-                🌐 Site Language: Indonesian ^
-            </button>
-        </div>
-        <div class="copyright">
-            © 2024 SANN404, Inc. All rights reserved.
+            <p>&copy; 2024 SANN404 FORUM. All rights reserved.</p>
         </div>
     </footer>
 
