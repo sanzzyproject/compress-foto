@@ -1,72 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor Online</title>
+    <title>SANN404 - Image Compressor Pro</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Image Compressor</h1>
-            <p>Compress JPG, PNG, & WebP securely in memory.</p>
-        </header>
-
-        <main>
-            <div class="upload-area" id="drop-zone">
-                <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
-                <div class="icon">📁</div>
-                <p>Drag & Drop your image here</p>
-                <button class="btn-secondary" onclick="document.getElementById('file-input').click()">Browse File</button>
-                <p class="limit-info">Max size: 5MB</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">SANN404<span class="dot">.</span></div>
+            <div class="nav-links">
+                <a href="#">Beranda</a>
+                <a href="#cara-pakai">Cara Pakai</a>
+                <a href="#testimoni">Testimoni</a>
             </div>
-
-            <div class="controls hidden" id="controls">
-                <div class="file-info">
-                    <span id="file-name">image.jpg</span>
-                    <span id="original-size">0 KB</span>
-                </div>
-                
-                <div class="quality-control">
-                    <label>Quality: <span id="quality-value">80</span>%</label>
-                    <input type="range" id="quality-slider" min="10" max="90" value="80">
-                </div>
-
-                <button id="compress-btn" class="btn-primary">Compress Image</button>
+            <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="User" class="avatar">
             </div>
+        </div>
+    </nav>
 
-            <div class="loading hidden" id="loading">
-                <div class="spinner"></div>
-                <p>Compressing...</p>
-            </div>
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Kompres ukuran <br>
+                <span class="gradient-text">gambar, foto, file</span><br>
+                dalam hitungan detik.
+            </h1>
+            <p class="subtitle">Unggah, atur kualitas yang Anda inginkan, kompres, dan unduh. Gratis digunakan tanpa perlu mendaftar.</p>
+        </div>
 
-            <div class="result hidden" id="result">
-                <h3>Result</h3>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <small>Original</small>
-                        <strong id="res-original">0 KB</strong>
+        <div class="tool-wrapper">
+            <div class="container">
+                <main>
+                    <div class="upload-area" id="drop-zone">
+                        <div class="upload-btn-wrapper">
+                            <button class="btn-primary-large" onclick="document.getElementById('file-input').click()">Unggah Gambar</button>
+                        </div>
+                        <p class="drag-text">atau seret & lepas gambar di sini</p>
+                        <p class="limit-info">Mendukung: JPG, PNG, WEBP (Maks 5MB)</p>
+                        <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
                     </div>
-                    <div class="stat-box">
-                        <small>Compressed</small>
-                        <strong id="res-compressed" class="success-text">0 KB</strong>
+
+                    <div class="controls hidden" id="controls">
+                        <div class="file-info">
+                            <span id="file-name">image.jpg</span>
+                            <span id="original-size">0 KB</span>
+                        </div>
+                        
+                        <div class="quality-control">
+                            <label>Kualitas Kompresi: <span id="quality-value">80</span>%</label>
+                            <input type="range" id="quality-slider" min="10" max="90" value="80">
+                        </div>
+
+                        <button id="compress-btn" class="btn-primary-large">Kompres Sekarang</button>
                     </div>
-                    <div class="stat-box">
-                        <small>Savings</small>
-                        <strong id="res-savings">0%</strong>
+
+                    <div class="loading hidden" id="loading">
+                        <div class="spinner"></div>
+                        <p>Sedang memproses...</p>
                     </div>
-                </div>
-                <a id="download-btn" class="btn-primary" download>Download Compressed Image</a>
-                <button id="reset-btn" class="btn-text">Compress Another</button>
+
+                    <div class="result hidden" id="result">
+                        <h3>Hasil Kompresi</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <small>Asli</small>
+                                <strong id="res-original">0 KB</strong>
+                            </div>
+                            <div class="stat-box">
+                                <small>Hasil</small>
+                                <strong id="res-compressed" class="success-text">0 KB</strong>
+                            </div>
+                            <div class="stat-box">
+                                <small>Hemat</small>
+                                <strong id="res-savings">0%</strong>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <a id="download-btn" class="btn-primary-large" download>Unduh Gambar</a>
+                            <button id="reset-btn" class="btn-text">Kompres Lainnya</button>
+                        </div>
+                    </div>
+                    
+                    <div id="error-msg" class="error-msg hidden"></div>
+                </main>
             </div>
+        </div>
+    </header>
+
+    <section class="stats-section">
+        <div class="stat-item">
+            <h2>18 Juta</h2>
+            <p>PENGGUNA</p>
+        </div>
+        <div class="stat-item">
+            <h2>120 Juta</h2>
+            <p>GAMBAR DIPROSES</p>
+        </div>
+    </section>
+
+    <section class="steps-section" id="cara-pakai">
+        <div class="step-card">
+            <div class="step-icon">1</div>
+            <h3>Unggah</h3>
+            <p>Unggah gambar Anda dengan cara drag & drop atau klik tombol unggah. Kami mendukung format JPG, PNG, dan WEBP.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">2</div>
+            <h3>Atur & Kompres</h3>
+            <p>Gunakan slider untuk menentukan tingkat kualitas yang diinginkan. Semakin rendah angkanya, semakin kecil ukurannya.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-icon">3</div>
+            <h3>Unduh</h3>
+            <p>Setelah selesai, lihat perbandingan ukuran dan unduh gambar yang sudah dikompres secara otomatis.</p>
+        </div>
+    </section>
+
+    <section class="testimonials-section" id="testimoni">
+        <h2 class="section-title">Dicintai oleh Jutaan Orang</h2>
+        
+        <div class="testimonial-container">
+            <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
             
-            <div id="error-msg" class="error-msg hidden"></div>
-        </main>
-    </div>
+            <div class="testimonial-wrapper">
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&q=80" alt="User 1">
+                        <div>
+                            <h4>Budi Santoso</h4>
+                            <span>Content Creator</span>
+                        </div>
+                    </div>
+                    <p>"Otak saya meledak 🤯 Ini terlihat sangat sederhana tapi hasilnya luar biasa! Saya sering kekurangan ruang penyimpanan, alat ini penyelamat."</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="User 2">
+                        <div>
+                            <h4>Siti Aminah</h4>
+                            <span>Online Seller</span>
+                        </div>
+                    </div>
+                    <p>"Sangat membantu untuk upload produk di marketplace agar loading web toko saya jadi lebih cepat. Terima kasih SANN404!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="user-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="User 3">
+                        <div>
+                            <h4>Rizky Ramadhan</h4>
+                            <span>Web Developer</span>
+                        </div>
+                    </div>
+                    <p>"Tool kompresi terbaik tanpa ribet. Tidak perlu login, tidak ada iklan mengganggu. UI-nya sangat bersih dan profesional."</p>
+                </div>
+            </div>
+
+            <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>SANN404 <br> FORUM</h3>
+                <p>Membantu Anda mengelola aset digital dengan lebih efisien, cepat, dan aman.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-col">
+                    <h4>Tentang</h4>
+                    <a href="#">Cerita Kami</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Karir</a>
+                </div>
+                <div class="link-col">
+                    <h4>Legal</h4>
+                    <a href="#">Privasi</a>
+                    <a href="#">Syarat & Ketentuan</a>
+                </div>
+                <div class="link-col">
+                    <h4>Hubungi</h4>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 SANN404 FORUM, Inc. All rights reserved.
+        </div>
+    </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Script Tambahan Khusus UI Slider (Tidak mengganggu fungsi kompresi)
+        let slideIndex = 0;
+        const wrapper = document.querySelector('.testimonial-wrapper');
+        const cards = document.querySelectorAll('.testimonial-card');
+
+        function moveSlide(n) {
+            const cardWidth = cards[0].offsetWidth + 32; // width + gap
+            const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+            
+            wrapper.scrollBy({
+                left: n * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
