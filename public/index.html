@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor Online</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Image Compressor</h1>
+            <p>Compress JPG, PNG, & WebP securely in memory.</p>
+        </header>
+
+        <main>
+            <div class="upload-area" id="drop-zone">
+                <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
+                <div class="icon">📁</div>
+                <p>Drag & Drop your image here</p>
+                <button class="btn-secondary" onclick="document.getElementById('file-input').click()">Browse File</button>
+                <p class="limit-info">Max size: 5MB</p>
+            </div>
+
+            <div class="controls hidden" id="controls">
+                <div class="file-info">
+                    <span id="file-name">image.jpg</span>
+                    <span id="original-size">0 KB</span>
+                </div>
+                
+                <div class="quality-control">
+                    <label>Quality: <span id="quality-value">80</span>%</label>
+                    <input type="range" id="quality-slider" min="10" max="90" value="80">
+                </div>
+
+                <button id="compress-btn" class="btn-primary">Compress Image</button>
+            </div>
+
+            <div class="loading hidden" id="loading">
+                <div class="spinner"></div>
+                <p>Compressing...</p>
+            </div>
+
+            <div class="result hidden" id="result">
+                <h3>Result</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <small>Original</small>
+                        <strong id="res-original">0 KB</strong>
+                    </div>
+                    <div class="stat-box">
+                        <small>Compressed</small>
+                        <strong id="res-compressed" class="success-text">0 KB</strong>
+                    </div>
+                    <div class="stat-box">
+                        <small>Savings</small>
+                        <strong id="res-savings">0%</strong>
+                    </div>
+                </div>
+                <a id="download-btn" class="btn-primary" download>Download Compressed Image</a>
+                <button id="reset-btn" class="btn-text">Compress Another</button>
+            </div>
+            
+            <div id="error-msg" class="error-msg hidden"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
