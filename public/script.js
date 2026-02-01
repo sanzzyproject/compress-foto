@@ -1,7 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // ==========================================
-    // LOGIKA KOMPRESI GAMBAR (TIDAK DIUBAH)
-    // ==========================================
+document.addEventListener('DOMContentLoaded', () => 
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
     const controls = document.getElementById('controls');
