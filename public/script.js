@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Variabel (Sesuai ID di HTML baru) ---
+    // UI Elements
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
     const controls = document.getElementById('controls');
@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMsg = document.getElementById('error-msg');
     const resetBtn = document.getElementById('reset-btn');
 
+    // Result Text Elements (Updated for New UI)
+    const resOriginal = document.getElementById('res-original');
+    const resCompressed = document.getElementById('res-compressed');
+    const resSavings = document.getElementById('res-savings');
+
     let currentFile = null;
 
     // --- Event Listeners ---
@@ -18,16 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Drag & Drop
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
-        dropZone.classList.add('dragover');
+        // Optional: Style change on drag over
+        dropZone.style.opacity = '0.7';
     });
 
     dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('dragover');
+        dropZone.style.opacity = '1';
     });
 
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
-        dropZone.classList.remove('dragover');
+        dropZone.style.opacity = '1';
         if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
     });
 
@@ -47,14 +53,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset
     resetBtn.addEventListener('click', resetUI);
 
-    // --- Functions (Logika Asli Tidak Diubah) ---
+    // --- Functions ---
 
     function handleFile(file) {
         if (!file.type.match('image.*')) {
             showError('Mohon unggah file gambar yang valid (JPG, PNG, WebP).');
             return;
         }
-        if (file.size > 5 * 1024 * 1024) {
+        if (file.size > 5 * 1024 * 1024) { // 5MB Limit
             showError('Ukuran file melebihi batas 5MB.');
             return;
         }
@@ -63,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('file-name').textContent = file.name;
         document.getElementById('original-size').textContent = formatBytes(file.size);
         
-        // Sembunyikan dropzone, tampilkan controls
+        // UI Transition: Hide Upload, Show Controls
         dropZone.classList.add('hidden');
         controls.classList.remove('hidden');
         errorMsg.classList.add('hidden');
@@ -81,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('quality', qualitySlider.value);
 
         try {
-            // URL endpoint tidak diubah
+            // Backend API call (TIDAK DIUBAH)
             const response = await fetch('/api/compress', {
                 method: 'POST',
                 body: formData
@@ -92,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(errData.error || 'Gagal mengompres gambar');
             }
 
-            // Get blob from response
             const blob = await response.blob();
             displayResult(blob);
 
@@ -109,18 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const originalSize = currentFile.size;
         const compressedSize = compressedBlob.size;
-        // Hitung savings
         const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
 
-        document.getElementById('res-original').textContent = formatBytes(originalSize);
-        document.getElementById('res-compressed').textContent = formatBytes(compressedSize);
-        document.getElementById('res-savings').textContent = `${savings}%`;
+        // Update Before/After UI
+        resOriginal.textContent = formatBytes(originalSize);
+        resCompressed.textContent = formatBytes(compressedSize);
+        resSavings.textContent = `Hemat ${savings}%`;
 
         // Create download link
         const url = URL.createObjectURL(compressedBlob);
         const downloadBtn = document.getElementById('download-btn');
         downloadBtn.href = url;
-        // Keep original extension or default to jpg if unknown
         downloadBtn.download = `compressed_${currentFile.name}`;
     }
 
