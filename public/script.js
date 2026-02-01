@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // UI Elements
+    // ==========================================
+    // LOGIKA KOMPRESI GAMBAR (TIDAK DIUBAH)
+    // ==========================================
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
     const controls = document.getElementById('controls');
@@ -11,56 +13,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMsg = document.getElementById('error-msg');
     const resetBtn = document.getElementById('reset-btn');
 
-    // Result Text Elements (Updated for New UI)
-    const resOriginal = document.getElementById('res-original');
-    const resCompressed = document.getElementById('res-compressed');
-    const resSavings = document.getElementById('res-savings');
-
     let currentFile = null;
 
-    // --- Event Listeners ---
-    
-    // Drag & Drop
+    // Drag & Drop Events
     dropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
-        // Optional: Style change on drag over
-        dropZone.style.opacity = '0.7';
+        dropZone.classList.add('dragover');
     });
-
     dropZone.addEventListener('dragleave', () => {
-        dropZone.style.opacity = '1';
+        dropZone.classList.remove('dragover');
     });
-
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
-        dropZone.style.opacity = '1';
+        dropZone.classList.remove('dragover');
         if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
     });
 
-    // File Input
+    // File Input Event
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length) handleFile(e.target.files[0]);
     });
 
-    // Slider
+    // Slider Event
     qualitySlider.addEventListener('input', (e) => {
         qualityValue.textContent = e.target.value;
     });
 
-    // Compress Action
+    // Buttons Events
     compressBtn.addEventListener('click', uploadAndCompress);
-    
-    // Reset
     resetBtn.addEventListener('click', resetUI);
 
-    // --- Functions ---
-
+    // Functions
     function handleFile(file) {
+        // Validasi tipe file
         if (!file.type.match('image.*')) {
             showError('Mohon unggah file gambar yang valid (JPG, PNG, WebP).');
             return;
         }
-        if (file.size > 5 * 1024 * 1024) { // 5MB Limit
+        // Validasi ukuran (contoh 5MB)
+        if (file.size > 5 * 1024 * 1024) {
             showError('Ukuran file melebihi batas 5MB.');
             return;
         }
@@ -69,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('file-name').textContent = file.name;
         document.getElementById('original-size').textContent = formatBytes(file.size);
         
-        // UI Transition: Hide Upload, Show Controls
+        // Update UI
         dropZone.classList.add('hidden');
         controls.classList.remove('hidden');
         errorMsg.classList.add('hidden');
@@ -87,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('quality', qualitySlider.value);
 
         try {
-            // Backend API call (TIDAK DIUBAH)
+            // PENTING: Endpoint '/api/compress' harus ada di backend Anda
             const response = await fetch('/api/compress', {
                 method: 'POST',
                 body: formData
@@ -116,12 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const compressedSize = compressedBlob.size;
         const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
 
-        // Update Before/After UI
-        resOriginal.textContent = formatBytes(originalSize);
-        resCompressed.textContent = formatBytes(compressedSize);
-        resSavings.textContent = `Hemat ${savings}%`;
+        document.getElementById('res-original').textContent = formatBytes(originalSize);
+        document.getElementById('res-compressed').textContent = formatBytes(compressedSize);
+        document.getElementById('res-savings').textContent = `${savings}%`;
 
-        // Create download link
+        // Buat link download
         const url = URL.createObjectURL(compressedBlob);
         const downloadBtn = document.getElementById('download-btn');
         downloadBtn.href = url;
@@ -148,5 +138,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const sizes = ['Bytes', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+
+
+    // ==========================================
+    // TAMBAHAN: LOGIKA UNTUK SLIDER TESTIMONI
+    // ==========================================
+    const sliderContainer = document.querySelector('.testimonial-slider-container');
+    const prevBtn = document.querySelector('.prev-slide');
+    const nextBtn = document.querySelector('.next-slide');
+
+    if (sliderContainer && prevBtn && nextBtn) {
+        // Jarak scroll setiap kali tombol ditekan (kira-kira lebar satu kartu + gap)
+        const scrollAmount = 380; 
+
+        nextBtn.addEventListener('click', () => {
+            sliderContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            sliderContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
     }
 });
