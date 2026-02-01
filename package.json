@@ -1,0 +1,16 @@
+{
+  "name": "image-compressor-online",
+  "version": "1.0.0",
+  "description": "Simple Serverless Image Compressor",
+  "main": "api/compress.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "sharp": "^0.33.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
