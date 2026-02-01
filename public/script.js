@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Variabel (Sesuai ID di HTML baru) ---
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
     const controls = document.getElementById('controls');
@@ -46,15 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset
     resetBtn.addEventListener('click', resetUI);
 
-    // --- Functions ---
+    // --- Functions (Logika Asli Tidak Diubah) ---
 
     function handleFile(file) {
         if (!file.type.match('image.*')) {
-            showError('Please upload a valid image file (JPG, PNG, WebP).');
+            showError('Mohon unggah file gambar yang valid (JPG, PNG, WebP).');
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
-            showError('File size exceeds 5MB limit.');
+            showError('Ukuran file melebihi batas 5MB.');
             return;
         }
 
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('file-name').textContent = file.name;
         document.getElementById('original-size').textContent = formatBytes(file.size);
         
+        // Sembunyikan dropzone, tampilkan controls
         dropZone.classList.add('hidden');
         controls.classList.remove('hidden');
         errorMsg.classList.add('hidden');
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('quality', qualitySlider.value);
 
         try {
+            // URL endpoint tidak diubah
             const response = await fetch('/api/compress', {
                 method: 'POST',
                 body: formData
@@ -86,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 const errData = await response.json();
-                throw new Error(errData.error || 'Compression failed');
+                throw new Error(errData.error || 'Gagal mengompres gambar');
             }
 
             // Get blob from response
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const originalSize = currentFile.size;
         const compressedSize = compressedBlob.size;
+        // Hitung savings
         const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
 
         document.getElementById('res-original').textContent = formatBytes(originalSize);
@@ -122,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetUI() {
         resultDiv.classList.add('hidden');
+        controls.classList.add('hidden');
         dropZone.classList.remove('hidden');
         fileInput.value = '';
         currentFile = null;
